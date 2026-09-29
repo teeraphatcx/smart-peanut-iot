@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════
+   Theme System — Light / Dark Mode CSS Variables
+   ═══════════════════════════════════════════════ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+:root {
+  /* Default = Dark mode */
+  --bg-root: #020617;         /* slate-950 */
+  --bg-surface: #0e1117;      /* sidebar / card bg */
+  --bg-card: #0f172a;         /* slate-900 */
+  --bg-card-hover: #1e293b;   /* slate-800 */
+  --bg-input: #020617;        /* input backgrounds */
+  --bg-elevated: #1e293b;     /* elevated panels */
+
+  --border-primary: #1e293b;  /* slate-800 */
+  --border-subtle: #1e2230;
+
+  --text-primary: #f1f5f9;    /* slate-100 */
+  --text-secondary: #94a3b8;  /* slate-400 */
+  --text-muted: #64748b;      /* slate-500 */
+  --text-inverse: #020617;
+
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+
+  --sidebar-bg: #0e1117;
+  --sidebar-item-active: #1a1f2e;
+  --sidebar-item-hover: rgba(21, 25, 36, 0.6);
+  --sidebar-text: #8b8fa3;
+
+  --navbar-bg: rgba(15, 23, 42, 0.9);  /* slate-900/90 */
+
+  --modal-overlay: rgba(2, 6, 23, 0.8);
+
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Light Theme ── */
+[data-theme="light"] {
+  --bg-root: #f8fafc;         /* slate-50 */
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;   /* slate-100 */
+  --bg-input: #f1f5f9;
+  --bg-elevated: #e2e8f0;     /* slate-200 */
+
+  --border-primary: #e2e8f0;  /* slate-200 */
+  --border-subtle: #e2e8f0;
+
+  --text-primary: #0f172a;    /* slate-900 */
+  --text-secondary: #475569;  /* slate-600 */
+  --text-muted: #94a3b8;      /* slate-400 */
+  --text-inverse: #f1f5f9;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-item-active: #f1f5f9;
+  --sidebar-item-hover: rgba(241, 245, 249, 0.8);
+  --sidebar-text: #64748b;
+
+  --navbar-bg: rgba(255, 255, 255, 0.92);
+
+  --modal-overlay: rgba(0, 0, 0, 0.4);
+
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--bg-root);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-root);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile & Desktop Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-root);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Themed Utility Classes ── */
+
+/* Cards */
+.theme-card {
+  background: var(--bg-card);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-card-hover:hover {
+  background: var(--bg-card-hover);
+}
+
+/* Surface (elevated backgrounds) */
+.theme-surface {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Text */
+.theme-text {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+/* Inputs */
+.theme-input {
+  background: var(--bg-input);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Borders */
+.theme-border {
+  border-color: var(--border-primary);
+}
+
+/* Navbar */
+.theme-navbar {
+  background: var(--navbar-bg);
+  border-color: var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Sidebar */
+.theme-sidebar {
+  background: var(--sidebar-bg);
+  border-color: var(--border-subtle);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Modal overlay */
+.theme-overlay {
+  background: var(--modal-overlay);
 }
